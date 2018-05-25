@@ -1,35 +1,46 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
+
     <div v-if="checkToken == false">
       <div class="navbar">
-        <nav class="nav transparent z-depth-0">
+        <nav class="transparent z-depth-0">
           <div class="nav-wrapper">
-            <a href="#" class="brand-logo logo black-text animated pulse infinite">Wanderlist</a>
+            <a href="#" class="logo black-text animated fadeIn">Wanderlist</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger color-teal"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li><Login /></li>
               <li><a href="" class="right-nav black-text" @click.prevent="fblogin">f</a></li>
             </ul>
           </div>
         </nav>
+        <ul id="mobile-demo" class="sidenav">
+          <!-- <li class="margin-side-bar"><Login /></li> -->
+          <li style="margin-top:10px;"><a class="waves-effect waves-light" style="font-weight:bold;font-size:25px;padding-left:20px;"><router-link :to="{ path: '/' }"><li>Home</li></router-link></a></li>
+          <hr>
+          <li><a class="waves-effect waves-light" style="font-weight:bold;font-size:25px;padding-left:20px;"><router-link :to="{ path: '/mauth' }"><li>Sign In</li></router-link></a></li>
+          <li class="margin-side-bar"><a href="" class="right-nav black-text" style="padding-left: 0px;font-size:30px;"  @click.prevent="fblogin">f</a></li>
+          <hr>
+        </ul>
       </div>
     </div>
     <div v-else>
       <div class="navbar">
-        <nav class="nav transparent z-depth-0">
+        <nav class="transparent z-depth-0">
           <div class="nav-wrapper">
-            <!-- <a href="#" class="brand-logo logo black-text">Jakarta</a> -->
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-              <a class="right-nav black-text" style="text-decoration:none;">Jakarta <sup style="color:#1e88e5">{{ weather }}</sup> <sup style="font-size:20px;">{{ temp }}°C</sup></a>
-            </ul>
+            <!-- <ul id="nav-mobile" class="left hide-on-med-and-down"> -->
+              <a class="right-nav black-text" style="text-decoration:none;">Jakarta <sup style="color:#2C9CC2">{{ weather }}</sup> <sup style="font-size:20px;">{{ temp }}°C</sup></a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger" style="color:#2C9CC2"><i class="material-icons">menu</i></a>
+            <!-- </ul> -->
             <ul id="nav-mobile" class="right hide-on-med-and-down">
               <li><a href="" class="right-nav black-text" @click="signout">Sign Out</a></li>
             </ul>
           </div>
         </nav>
+        <ul id="mobile-demo" class="sidenav">
+          <!-- <hr> -->
+          <li><a href="" class="right-nav black-text" style="font-size:25px;padding-left:20px;" @click="signout">Sign Out</a></li>
+          <hr>
+        </ul>
       </div>
     </div>
 
@@ -55,15 +66,36 @@
 }
 
 @media only screen and (max-width: 375px) {
-  .nav-wrapper {
-    margin-top: 15px;
-    margin-left: 1vw;
-    margin-right: 1vw;
+  .color-teal {
+    color: teal;
   }
+
+  .responsive-img {
+    margin-top: 5px;
+    max-width: 70% !important;
+  }
+
+  .nav-wrapper {
+    margin-top: 20px;
+  }
+
+  .container-heading {
+    margin-top: 0px;
+  }
+
+  .sidenav {
+    width: 160px !important;
+  }
+
+}
+
+.margin-side-bar, hr {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .logo {
-  font-size: 50px !important;
+  font-size: 50px;
 }
 
 .right-nav {
@@ -138,7 +170,7 @@ export default {
               // console.log('from /me', response)
               // console.log('Good to see you, ' + response.name + '.');
 
-              axios.post('http://localhost:3000/users/fblogin', { email: response.email })
+              axios.post('http://35.198.209.134/users/fblogin', { email: response.email })
                 .then(result => {
                   // console.log('FBlogin success', result)
                   

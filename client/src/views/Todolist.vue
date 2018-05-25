@@ -4,7 +4,7 @@
     <div class="name animated flash">
       {{ getProfile }}
     </div>
-    <img class="logo animated fadeIn" src="../assets/images/wanderlist.jpg">
+    <img class="logo animated fadeIn" src="https://storage.googleapis.com/wanderlist-files.madebybastian.com/web-images/wanderlist.jpg">
     <div class="row">
       <div class="input-container">
         <div class="input-section col l5 s11">
@@ -58,7 +58,7 @@
     </div>
     
     <footer>
-      <a href="http://www.madebybastian.com/" style="color:teal" target="_blank">© 2018 madebybastian.com</a>
+      <a href="http://www.madebybastian.com/" style="color:#2C9CC2" target="_blank">© 2018 madebybastian.com</a>
     </footer>
 
   </div>
@@ -85,7 +85,7 @@ footer {
 }
 
 a {
-  color: #1e88e5 !important;
+  color: #2C9CC2 !important;
 }
 
 .btn {
@@ -182,7 +182,7 @@ export default {
       let token = localStorage.getItem('authkey')
       let config = { headers: {'authkey': token} }
 
-      axios.post('http://localhost:3000/todos/', obj, config)
+      axios.post('http://35.198.209.134/todos/', obj, config)
         .then(result => {
           this.$store.commit('addTodo', result.data.todo)
           this.todo = ''
@@ -195,7 +195,7 @@ export default {
     },
     deleteTodo (items) {
       // console.log(items)
-      let url = 'http://localhost:3000/todos/delete?id=' + items._id
+      let url = 'http://35.198.209.134/todos/delete?id=' + items._id
       let token = localStorage.getItem('authkey')
       let config = { headers: {'authkey': token} }
 
@@ -214,7 +214,7 @@ export default {
       let token = localStorage.getItem('authkey')
       let config = { headers: {'authkey': token} }
 
-      axios.put('http://localhost:3000/todos/status', { _id: items._id }, config)
+      axios.put('http://35.198.209.134/todos/status', { _id: items._id }, config)
         .then(result => {
           // console.log('==========',result)
           alertify.success(`Update status successful: ${result.data.todo_updated.todo}`);

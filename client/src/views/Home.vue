@@ -1,11 +1,9 @@
 <template>
   <div class="home">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <img class="logo" src="../assets/images/wanderlist.jpg"> -->
-    <!-- <img class="homeimage" src="../assets/images/gili.jpg"> -->
+    
     <div class="row animated fadeIn">
       <div class="container-form">
-        <div class="form col l3 offset-l1 s12">
+        <div class="form col l3 offset-l1 s10 offset-s1">
           <div class="row">
             <form class="col l12 s12">
               <div class="row">
@@ -28,12 +26,12 @@
               <div class="row">
                 <a class="waves-effect waves-light btn reg" @click="register">JOIN US</a>
               </div>
-              <h4 class="absolute animated slideInLeft">. Friendly todolist for your travel<span style="color:white">ing pleasures .</span></h4>
+              <h4 class="absolute animated slideInLeft">. Friendly todolist for your travel<span class="white-color">ing pleasures .</span></h4>
             </form>
           </div>
         </div>
         <div class="container-img l5 s12">
-          <img class="frontimage" src="../assets/images/bycicle.jpg">
+          <img class="frontimage responsive-img" src="https://storage.googleapis.com/wanderlist-files.madebybastian.com/web-images/bycicle.jpg">
         </div>
       </div>
     </div>
@@ -47,18 +45,56 @@
 
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Fira+Sans+Extra+Condensed|Hind+Madurai|Khand|Roboto');
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans|Fira+Sans+Extra+Condensed|Hind+Madurai|Khand|Roboto");
 
 .absolute {
   position: absolute;
   margin-left: 50px;
 }
 
+.white-color {
+  color: white;
+}
+
+@media only screen and (max-width: 375px) {
+  .container-heading {
+    margin-top: 0px !important;
+  }
+
+  .form-heading {
+    margin-top: 20px;
+  }
+
+  .absolute {
+    position: relative;
+    margin-left: 0px;
+  }
+
+  h4 {
+    margin-top: 50px;
+  }
+
+  .white-color {
+    color: black;
+  }
+
+  .frontimage {
+    margin-top: 0px !important;
+    margin-left: 20px !important;
+    margin-bottom: 70px;
+  }
+
+  .responsive-img {
+    max-width: 90% !important;
+  }
+
+}
+
 .container-form {
   /* border: 1px solid black; */
   /* height: 700px; */
   margin-top: 30px;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
   color: black;
 }
 
@@ -122,37 +158,37 @@ footer {
   width: 100%;
   opacity: 1;
 }
-
 </style>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import Login from '@/components/Login.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
+import Login from "@/components/Login.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   data: function() {
     return {
-      email_register: '',
-      password_register: '',
-    }
+      email_register: "",
+      password_register: ""
+    };
   },
   components: {
     HelloWorld,
     Login
   },
-  created () {
-    this.fbinit()
+  created() {
+    this.fbinit();
   },
   methods: {
-    register () {
+    register() {
       let obj = {
         email: this.email_register,
         password: this.password_register
-      }
+      };
 
-      axios.post('http://localhost:3000/users/signup', obj)
+      axios
+        .post("http://35.198.209.134/users/signup", obj)
         .then(result => {
           // console.log('User sign up successfull ',result)
 
@@ -160,42 +196,47 @@ export default {
           localStorage.setItem("authkey", token);
 
           alertify.success(`User registration successful :D`);
-          alertify.success(`You'll be redirected to your todolist page in a few seconds..`);
-          
-          setTimeout(() => { this.$router.push('todolist') }, 2000);
+          alertify.success(
+            `You'll be redirected to your todolist page in a few seconds..`
+          );
+
+          setTimeout(() => {
+            this.$router.push("todolist");
+          }, 2000);
         })
         .catch(err => {
-          console.log('ERROR user sign up',err)
-        })
+          console.log("ERROR user sign up", err);
+        });
     },
-    fbinit () {
+    fbinit() {
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '444144236032201',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v3.0'
+          appId: "444144236032201",
+          cookie: true,
+          xfbml: true,
+          version: "v3.0"
         });
 
-        // FB.AppEvents.logPageView();   
+        // FB.AppEvents.logPageView();
 
         //This function should be here, inside window.fbAsyncInit
         // FB.getLoginStatus(function(response) {
         //   console.log(response);
         // });
-
       };
 
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
+      (function(d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-
-    },
-
+      })(document, "script", "facebook-jssdk");
+    }
   }
-}
+};
 </script>

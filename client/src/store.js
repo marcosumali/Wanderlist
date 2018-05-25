@@ -50,7 +50,7 @@ export default new Vuex.Store({
         headers: {'authkey': token}
       }
 
-      axios.get('http://localhost:3000/todos/list', config)
+      axios.get('http://35.198.209.134/todos/list', config)
         .then(results => {
           // console.log(results)
           // console.log(this.state.logstatus)
@@ -77,7 +77,7 @@ export default new Vuex.Store({
       }
 
       if (token) {
-        axios.get('http://localhost:3000/users/profile', config)
+        axios.get('http://35.198.209.134/users/profile', config)
           .then(result => {
             // console.log(result)
             commit('getProfile', result.data.user.email)
